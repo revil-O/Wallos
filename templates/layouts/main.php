@@ -55,7 +55,7 @@ if (!function_exists('hex2rgb')) {
     window.lang = "<?= $lang ?>";
     window.colorTheme = "<?= $colorTheme ?>";
     window.mobileNavigation = "<?= $settings['mobileNavigation'] == "true" ?>";
-    window.csrfToken = "<?= htmlspecialchars(generate_csrf_token()) ?>";
+    window.csrfToken = "<?= function_exists('generate_csrf_token') ? htmlspecialchars(generate_csrf_token()) : '' ?>";
   </script>
   <style>
     <?= htmlspecialchars($customCss, ENT_QUOTES, 'UTF-8') ?>

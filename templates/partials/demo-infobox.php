@@ -1,7 +1,11 @@
 <div class="info-box" style="padding: 1rem; border: 2px solid var(--main-color); border-radius: 8px; margin: 1rem 0; background-color: var(--accent-color);">
     <div style="display: flex; align-items: center; gap: 1rem;">
         <?php if (isset($icon)): ?>
-            <i class="fa <?= $this->escape($icon) ?>" style="font-size: 2rem; color: var(--main-color);"></i>
+            <?php
+            // Validate icon is a safe Font Awesome class
+            $safeIcon = preg_match('/^fa-[a-z0-9-]+$/', $icon) ? $this->escape($icon) : 'fa-info-circle';
+            ?>
+            <i class="fa <?= $safeIcon ?>" style="font-size: 2rem; color: var(--main-color);"></i>
         <?php endif; ?>
         <div style="flex: 1;">
             <?php if (isset($title)): ?>

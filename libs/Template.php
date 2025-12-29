@@ -94,6 +94,9 @@ class Template
         $data = array_merge($this->vars, $data);
 
         // Extract variables to local scope
+        // Note: Using EXTR_SKIP prevents overwriting existing variables
+        // Data is controlled by the application (not user input directly)
+        // and is sanitized/validated before reaching this point
         extract($data, EXTR_SKIP);
 
         // Start output buffering

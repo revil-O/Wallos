@@ -146,12 +146,33 @@ if (trim($partialOutput) === '<span>John</span>') {
 
 // Cleanup
 echo "Cleaning up test files...\n";
-array_map('unlink', glob($partialsDir . '/*'));
-array_map('unlink', glob($layoutsDir . '/*'));
-array_map('unlink', glob($testTemplateDir . '/*'));
-rmdir($partialsDir);
-rmdir($layoutsDir);
-rmdir($testTemplateDir);
+$files = glob($partialsDir . '/*');
+if ($files) {
+    foreach ($files as $file) {
+        if (is_file($file)) {
+            unlink($file);
+        }
+    }
+}
+$files = glob($layoutsDir . '/*');
+if ($files) {
+    foreach ($files as $file) {
+        if (is_file($file)) {
+            unlink($file);
+        }
+    }
+}
+$files = glob($testTemplateDir . '/*');
+if ($files) {
+    foreach ($files as $file) {
+        if (is_file($file)) {
+            unlink($file);
+        }
+    }
+}
+if (is_dir($partialsDir)) rmdir($partialsDir);
+if (is_dir($layoutsDir)) rmdir($layoutsDir);
+if (is_dir($testTemplateDir)) rmdir($testTemplateDir);
 
 echo "\n========================================\n";
 echo "All tests passed! ✓\n";
