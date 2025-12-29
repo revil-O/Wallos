@@ -212,6 +212,53 @@ OIDC can be enabled on the Admin page and can be used with providers that suppor
 
 Wallos provides a comprehensive API that allows you to interact with the application programmatically. The API documentation is available at [https://api.wallosapp.com/](https://api.wallosapp.com/).
 
+## Template System
+
+Wallos includes a lightweight template system that separates business logic from presentation, making the codebase more maintainable and easier to extend.
+
+### Features
+- **Separation of Concerns** - Clean separation between PHP logic and HTML templates
+- **Layouts** - Reusable page layouts (header, footer, navigation)
+- **Partials** - Reusable components that can be included in multiple pages
+- **Built-in Security** - Automatic XSS protection with output escaping
+- **Easy to Use** - Simple API with helper functions
+
+### Quick Start
+
+```php
+<?php
+// Include the template helpers
+require_once 'includes/header.php';
+require_once 'includes/template_helpers.php';
+
+// Your business logic
+$data = [
+    'title' => 'My Page',
+    'items' => ['Item 1', 'Item 2', 'Item 3']
+];
+
+// Render the page with the main layout
+render_page('mypage', $data);
+?>
+```
+
+Create your template in `templates/pages/mypage.php`:
+
+```php
+<section class="contain">
+    <h1><?= $this->escape($title) ?></h1>
+    <ul>
+        <?php foreach ($items as $item): ?>
+            <li><?= $this->escape($item) ?></li>
+        <?php endforeach; ?>
+    </ul>
+</section>
+```
+
+For detailed documentation, see [templates/README.md](templates/README.md).
+
+For a live example, visit `/template-demo.php` in your Wallos installation.
+
 ## Contributing
 
 Feel free to open Pull requests with bug fixes and features. I'll do my best to keep an eye on those.  

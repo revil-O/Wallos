@@ -55,6 +55,37 @@ We welcome contributions from the community and look forward to working with you
 * **Feature Requests:** If you have a feature request, please open an issue with a clear description of the feature and its benefits.
 * **Priority:** Bug fixes will take priority over feature requests.
 
+## Coding Guidelines
+
+### Using the Template System
+
+When adding new pages or modifying existing ones, consider using the template system for better code organization:
+
+1. **Separate Logic from Presentation:**
+   * Put all PHP business logic at the top of your page file
+   * Move HTML/presentation code to a template file in `templates/pages/`
+
+2. **Use the Template Helpers:**
+   ```php
+   require_once 'includes/template_helpers.php';
+   
+   // Your logic here
+   $data = ['key' => 'value'];
+   
+   // Render with main layout
+   render_page('your-page', $data);
+   ```
+
+3. **Always Escape Output:**
+   * Use `$this->escape()` or `$this->e()` for user-provided content
+   * This helps prevent XSS vulnerabilities
+
+4. **Create Reusable Partials:**
+   * If you have components used across multiple pages, create them in `templates/partials/`
+   * Include them with `$this->partial('partial-name', $data)`
+
+See `templates/README.md` for complete documentation and `template-demo.php` for a working example.
+
 ## Translations
 
 If you want to contribute with a translation of wallos:
